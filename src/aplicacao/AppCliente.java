@@ -2,10 +2,10 @@ package aplicacao;
 
 import java.util.ArrayList;
 
-import cliente.Cliente;
 import conta.ContaBancaria;
 import conta.ContaCorrente;
 import conta.ContaPoupanca;
+import pessoa.cliente.Cliente;
 
 public class AppCliente extends Cliente {
 
