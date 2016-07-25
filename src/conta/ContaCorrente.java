@@ -1,6 +1,10 @@
 package conta;
 
 public class ContaCorrente extends ContaBancaria implements ITransacoes {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected float limiteEspecial;
 
 	public ContaCorrente() {

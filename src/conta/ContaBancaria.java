@@ -1,12 +1,19 @@
 package conta;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class ContaBancaria {
+public class ContaBancaria implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int numero;
 	private float saldo;
 	private int senha;
-	private ArrayList<String> extrato;
+	private ArrayList<String> extrato = new ArrayList<String>();
 
 	public int getNumero() {
 		return numero;
@@ -56,5 +63,11 @@ public class ContaBancaria {
 		setSaldo(saldo);
 		
 		System.out.println("Depósito realizado com sucesso.");
+		
+		extrato.add("Realizado depósito de " + valor + " em " + retornaDataAtual());
+	}
+	
+	public static String retornaDataAtual() {
+		return new SimpleDateFormat("dd/MM/yyyy 'às' HH:mm:ss").format(new Date());
 	}
 }

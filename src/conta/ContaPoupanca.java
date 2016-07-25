@@ -2,6 +2,11 @@ package conta;
 
 public class ContaPoupanca extends ContaBancaria implements ITransacoes {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public void Render(float taxa) {
 		float saldo = this.getSaldo();
 

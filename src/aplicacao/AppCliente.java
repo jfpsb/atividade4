@@ -5,19 +5,44 @@ import java.util.ArrayList;
 import conta.ContaBancaria;
 import conta.ContaCorrente;
 import conta.ContaPoupanca;
+import input.Ler;
 import pessoa.cliente.Cliente;
 
-public class AppCliente extends Cliente {
+public class AppCliente {
 
 	private boolean logado;
+	private Cliente cliente;
 
-	public AppCliente(int numero, int senha) {
-		logado = this.logar(numero, senha);
+	public AppCliente(Cliente cliente) {
+		this.cliente = cliente;
+		System.out.println("VOCÊ PRECISARÁ LOGAR ANTES DE REALIZAR QUALQUER OPERAÇÃO!");
+	}
+
+	public void mostrarMenuCliente() {
+		int opcao;
+
+		System.out.println("Acompanhe o seguinte menu: ");
+		System.out.println("1 - Desejo logar para usar as operações disponíveis;");
+		System.out.println("2 - Desejo realizar um saque;");
+		System.out.println("3 - Desejo realizar um depósito;");
+		System.out.println("4 - Desejo realizar uma tranferência;");
+		System.out.println("5 - Desejo verificar meu saldo;");
+		System.out.println("6 - Desejo verificar meu extrato bancário;");
+		System.out.println("7 - Desejo sair deste menu;");
+
+		System.out.printf("Digite a opção desejada: ");
+		opcao = Ler.lerInt();
+
+		switch (opcao) {
+		case 1:
+			
+			break;
+		}
 	}
 
 	public boolean logar(int numero, int senha) {
 
-		if (numero == this.getConta().getNumero() && senha == this.getConta().getSenha()) {
+		if (numero == cliente.getConta().getNumero() && senha == cliente.getConta().getSenha()) {
 			return true;
 		}
 
@@ -28,7 +53,7 @@ public class AppCliente extends Cliente {
 		if (!logado)
 			return false;
 
-		ContaBancaria c = this.getConta();
+		ContaBancaria c = cliente.getConta();
 
 		if (c instanceof ContaCorrente) {
 			return ((ContaCorrente) c).Sacar(valor, senha);
@@ -41,14 +66,14 @@ public class AppCliente extends Cliente {
 		if (!logado)
 			return;
 
-		this.getConta().Depositar(valor);
+		cliente.getConta().Depositar(valor);
 	}
 
 	public boolean transferir(ContaBancaria conta, float valor, int senha) {
 		if (!logado)
 			return false;
 
-		ContaBancaria c = this.getConta();
+		ContaBancaria c = cliente.getConta();
 
 		if (c instanceof ContaCorrente) {
 			return ((ContaCorrente) c).Transferir(conta, valor, senha);
@@ -63,21 +88,21 @@ public class AppCliente extends Cliente {
 			return 0;
 		}
 
-		return this.getConta().getSaldo();
+		return cliente.getConta().getSaldo();
 	}
 
 	public String verificarExtrato() {
 		if (!logado)
 			return "Autenticação falhou";
-		
+
 		ArrayList<String> ext = new ArrayList<String>();
-		
-		ext = this.getConta().getExtrato();
-		
-		for(String s : ext){
+
+		ext = cliente.getConta().getExtrato();
+
+		for (String s : ext) {
 			System.out.println(s);
 		}
-		
+
 		return null;
 	}
 

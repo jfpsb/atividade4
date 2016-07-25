@@ -8,13 +8,13 @@ public class OperacoesGerente {
 		Gerente gerente = new Gerente();
 		String nome, cpf, matricula;
 
-		System.out.println("Informe o nome do gerente: ");
+		System.out.printf("Informe o nome do gerente: ");
 		nome = Ler.linha();
 
-		System.out.println("Informe o CPF do gerente: ");
+		System.out.printf("Informe o CPF do gerente: ");
 		cpf = Ler.linha();
 
-		System.out.println("Informe a matrícula do gerente: ");
+		System.out.printf("Informe a matrícula do gerente: ");
 		matricula = Ler.linha();
 		
 		gerente.setNome(nome);
