@@ -13,7 +13,7 @@ public class ContaBancaria implements Serializable {
 	private int numero;
 	private float saldo;
 	private int senha;
-	private ArrayList<String> extrato = new ArrayList<String>();
+	protected ArrayList<String> extrato = new ArrayList<String>();
 
 	public int getNumero() {
 		return numero;

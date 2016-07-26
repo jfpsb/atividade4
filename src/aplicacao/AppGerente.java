@@ -44,6 +44,9 @@ public class AppGerente {
 				System.out.println("Opção inválida.");
 				break;
 			}
+			
+			AppBanco.atualizaArquivoAgencia();
+			AppBanco.atualizaArquivoGerente();
 
 			if (sair != 1) {
 				System.out.printf("Deseja repetir o menu de Gerente? Digite 1 para SIM, qualquer outro para NÃO: ");

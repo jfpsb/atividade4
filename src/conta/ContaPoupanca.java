@@ -15,6 +15,8 @@ public class ContaPoupanca extends ContaBancaria implements ITransacoes {
 		this.setSaldo(saldo);
 
 		System.out.println("Novo saldo após rendimento: " + this.getSaldo());
+		
+		extrato.add("Realizado rendimento em conta de valor " + (saldo * taxa) + ". Novo saldo: " + this.getSaldo() + ". Em " + retornaDataAtual());
 	}
 
 	@Override
@@ -24,6 +26,10 @@ public class ContaPoupanca extends ContaBancaria implements ITransacoes {
 		if (Autenticar(senha) && valor <= saldo) {
 			saldo -= valor;
 			this.setSaldo(saldo);
+			
+			extrato.add("Saque de valor " + valor + " realizado em " + retornaDataAtual());
+			
+			return true;
 		}
 
 		return false;
@@ -40,6 +46,8 @@ public class ContaPoupanca extends ContaBancaria implements ITransacoes {
 
 			this.setSaldo(saldoOutcome);
 			conta.setSaldo(saldoIncome);
+			
+			extrato.add("Transferência de valor " + valor + " realizada em " + retornaDataAtual() + " para conta de número " + conta.getNumero());
 
 			return true;
 		}

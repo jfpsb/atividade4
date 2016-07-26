@@ -8,7 +8,18 @@ import pessoa.cliente.Cliente;
 import pessoa.gerente.Gerente;
 import pessoa.gerente.OperacoesGerente;
 
+/**
+ * Controla as operações de Agência.
+ * 
+ * @author jfpsb
+ *
+ */
 public class OperacoesAgencia {
+	/**
+	 * Realiza o cadastro de uma Agência no sistema.
+	 * 
+	 * @return Retorna a agência criada.
+	 */
 	public static Agencia CadastrarAgencia() {
 		Agencia agencia = new Agencia();
 		Gerente gerente = null;
@@ -28,7 +39,7 @@ public class OperacoesAgencia {
 			switch (opcao) {
 			case 1:
 				matriculaPesquisa = Ler.linha();
-				gerente = ManipulaArquivo.<Gerente>RetornaObjArquivo(matriculaPesquisa, "Gerentes");
+				gerente = ManipulaArquivo.<Gerente> RetornaObjArquivo(matriculaPesquisa, "Gerentes");
 				break;
 			case 2:
 				gerente = OperacoesGerente.CadastrarGerente();
@@ -36,7 +47,7 @@ public class OperacoesAgencia {
 			case 3:
 				System.out.println("Listando todos os gerentes:");
 				boolean lista = ManipulaArquivo.ListarArquivos("Gerentes");
-				if(lista)
+				if (lista)
 					gerente = digitarNumeroGerente();
 				break;
 			default:
@@ -44,19 +55,26 @@ public class OperacoesAgencia {
 				break;
 			}
 		}
-		
+
 		System.out.printf("Informe o número desta agência: ");
 		numeroAgencia = Ler.lerInt();
 
 		agencia.setGerente(gerente);
 		agencia.setClientes(clientes);
 		agencia.setNumero(numeroAgencia);
-		
+
 		ManipulaArquivo.SalvarObjArquivo(agencia, "Agencias", String.valueOf(agencia.getNumero()));
 
 		return agencia;
 	}
-	
+
+	/**
+	 * Se for escolhida a opção de escolher um gerente já cadastrado, este
+	 * método retorna o objeto do gerente baseado na matrícula digitada pelo
+	 * usuário.
+	 * 
+	 * @return Gerente escolhido pelo usuário.
+	 */
 	private static Gerente digitarNumeroGerente() {
 		int numero;
 		System.out.println("Digite o número do gerente: ");

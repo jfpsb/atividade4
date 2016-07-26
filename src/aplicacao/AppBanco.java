@@ -18,17 +18,14 @@ public class AppBanco {
 	public void setBanco(Agencia banco) {
 		AppBanco.banco = banco;
 	}
-	
+
 	public void iniciaAppBanco() {
 		escolherAgencia();
-		escolherTipoPessoa();
 		atualizaArquivoAgencia();
 	}
 
 	private static void escolherAgencia() {
 		int opcao;
-		
-		banco = null;
 
 		while (banco == null) {
 
@@ -62,6 +59,10 @@ public class AppBanco {
 				System.out.println("Opcão inválida.");
 				break;
 			}
+
+			atualizaArquivoAgencia();
+			escolherTipoPessoa();
+			banco = null;
 		}
 	}
 
@@ -97,15 +98,17 @@ public class AppBanco {
 					"Deseja repetir o acesso (Cliente ou Gerente)? Digite 1 para SIM, qualquer outro para NÃO: ");
 			repetir = Ler.lerInt();
 		}
-		
-		atualizaArquivoAgencia();
-		escolherAgencia();
 	}
 
-	private static void atualizaArquivoAgencia() {
+	public static void atualizaArquivoAgencia() {
 		ManipulaArquivo.SalvarObjArquivo(banco, "Agencias", String.valueOf(banco.getNumero()));
 	}
-	
+
+	public static void atualizaArquivoGerente() {
+		ManipulaArquivo.SalvarObjArquivo(banco.getGerente(), "Gerentes",
+				String.valueOf(banco.getGerente().getMatricula()));
+	}
+
 	private static void iniciarAppCliente() {
 		int numero;
 

@@ -22,21 +22,25 @@ public class ContaCorrente extends ContaBancaria implements ITransacoes {
 	public void Tarifar(float tarifa) {
 		float saldo = this.getSaldo();
 
-		saldo = saldo - tarifa;
+		saldo -= tarifa;
 
 		this.setSaldo(saldo);
 
 		System.out.println("\nNovo saldo após tarifa: " + this.getSaldo());
+		
+		extrato.add("Realizada tarifação em conta de valor " + tarifa + ". Novo saldo: " + this.getSaldo() + ". Em " + retornaDataAtual());
 	}
 
 	@Override
 	public boolean Sacar(float valor, int senha) {
 		float saldo = this.getSaldo();
 
-		if (Autenticar(senha) && valor <= Math.abs((saldo + limiteEspecial))) {
+		if (Autenticar(senha) && valor <= (saldo + limiteEspecial)) {
 			saldo = saldo - valor;
 
 			this.setSaldo(saldo);
+			
+			extrato.add("Saque de valor " + valor + " realizado em " + retornaDataAtual());
 
 			return true;
 		}
@@ -55,6 +59,8 @@ public class ContaCorrente extends ContaBancaria implements ITransacoes {
 
 			this.setSaldo(saldoOutcome);
 			conta.setSaldo(saldoIncome);
+			
+			extrato.add("Transferência de valor " + valor + " realizada em " + retornaDataAtual() + " para conta de número " + conta.getNumero());
 
 			return true;
 		}
