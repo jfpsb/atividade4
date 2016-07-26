@@ -11,7 +11,7 @@ public class AppBanco {
 	private static AppCliente appCliente;
 	private static AppGerente appGerente;
 
-	public Agencia getBanco() {
+	public static Agencia getBanco() {
 		return banco;
 	}
 
@@ -67,8 +67,9 @@ public class AppBanco {
 	private static void escolherTipoPessoa() {
 		int opcao, repetir = 1;
 
-		if (banco.getClientes().size() != 0) {
-			while (repetir == 1) {
+		while (repetir == 1) {
+			if (banco.getClientes().size() != 0) {
+
 				appGerente = null;
 				appCliente = null;
 				System.out.println("1 - Gerente");
@@ -87,42 +88,41 @@ public class AppBanco {
 					System.out.println("Opção inválida.");
 					break;
 				}
-				
-				System.out.printf("Deseja repetir o acesso? Digite 1 para SIM, qualquer outro para NÃO: ");
-				repetir = Ler.lerInt();
+			} else {
+				System.out.println("Esta Agência não possui clientes, você será enviado direto ao modo Gerente.");
+				iniciarAppGerente();
 			}
-		} else {
-			System.out.println("Esta Agência não possui clientes, você será enviado direto ao modo Gerente.");
-			iniciarAppGerente();
+
+			System.out.printf(
+					"Deseja repetir o acesso (Cliente ou Gerente)? Digite 1 para SIM, qualquer outro para NÃO: ");
+			repetir = Ler.lerInt();
 		}
 	}
 
 	private static void iniciarAppCliente() {
 		int numero;
-		
+
 		System.out.printf("Informe o número de sua conta bancária: ");
-		numero =  Ler.lerInt();
-		
-		if(banco.getClientes().containsKey(numero)) {
+		numero = Ler.lerInt();
+
+		if (banco.getClientes().containsKey(numero)) {
 			Cliente cliente = banco.getClientes().get(numero);
 			appCliente = new AppCliente(cliente);
 			appCliente.mostrarMenuCliente();
-		}
-		else {
+		} else {
 			System.out.println("Esta conta não existe nesta Agência.");
 		}
 	}
 
 	private static void iniciarAppGerente() {
 		String matricula;
-		
+
 		System.out.printf("Informe a matrícula do Gerente responsável por esta Agência: ");
 		matricula = Ler.linha();
-		if(matricula.equals(banco.getGerente().getMatricula())) {
+		if (matricula.equals(banco.getGerente().getMatricula())) {
 			appGerente = new AppGerente();
 			appGerente.mostraMenuGerente();
-		}
-		else {
+		} else {
 			System.out.println("A matrícula informada está incorreta.");
 		}
 	}

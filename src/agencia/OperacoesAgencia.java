@@ -51,6 +51,8 @@ public class OperacoesAgencia {
 		agencia.setGerente(gerente);
 		agencia.setClientes(clientes);
 		agencia.setNumero(numeroAgencia);
+		
+		ManipulaArquivo.SalvarObjArquivo(agencia, "Agencias", String.valueOf(agencia.getNumero()));
 
 		return agencia;
 	}
