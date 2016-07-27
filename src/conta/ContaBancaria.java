@@ -60,9 +60,7 @@ public class ContaBancaria implements Serializable {
 
 		saldo += valor;
 
-		setSaldo(saldo);
-		
-		System.out.println("Depósito realizado com sucesso.");
+		setSaldo(saldo);		
 		
 		extrato.add("Realizado depósito de " + valor + " em " + retornaDataAtual());
 	}

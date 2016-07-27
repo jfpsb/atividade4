@@ -15,15 +15,17 @@ public class AppBanco {
 		return banco;
 	}
 
-	public void setBanco(Agencia banco) {
-		AppBanco.banco = banco;
-	}
-
+	/**
+	 * Chama os métodos que darão início ao banco.
+	 */
 	public void iniciaAppBanco() {
 		escolherAgencia();
 		atualizaArquivoAgencia();
 	}
 
+	/**
+	 * Método responsável por determinar a agência a ser usada.
+	 */
 	private static void escolherAgencia() {
 		int opcao;
 
@@ -66,6 +68,10 @@ public class AppBanco {
 		}
 	}
 
+	/**
+	 * Após escolher a agência, deve ser escolhido o tipo de usuário que irá
+	 * utilizar o sistema.
+	 */
 	private static void escolherTipoPessoa() {
 		int opcao, repetir = 1;
 
@@ -100,15 +106,26 @@ public class AppBanco {
 		}
 	}
 
+	/**
+	 * Atualiza o arquivo que guarda os dados da agência atual.
+	 */
 	public static void atualizaArquivoAgencia() {
-		ManipulaArquivo.SalvarObjArquivo(banco, "Agencias", String.valueOf(banco.getNumero()));
+		if (banco != null)
+			ManipulaArquivo.SalvarObjArquivo(banco, "Agencias", String.valueOf(banco.getNumero()));
 	}
 
+	/**
+	 * Atualiza o arquivo que guarda os dados do gerente da agência atual.
+	 */
 	public static void atualizaArquivoGerente() {
-		ManipulaArquivo.SalvarObjArquivo(banco.getGerente(), "Gerentes",
-				String.valueOf(banco.getGerente().getMatricula()));
+		if (banco.getGerente() != null)
+			ManipulaArquivo.SalvarObjArquivo(banco.getGerente(), "Gerentes",
+					String.valueOf(banco.getGerente().getMatricula()));
 	}
 
+	/**
+	 * Inicia a aplicação de cliente.
+	 */
 	private static void iniciarAppCliente() {
 		int numero;
 
@@ -124,6 +141,9 @@ public class AppBanco {
 		}
 	}
 
+	/**
+	 * Inicia a aplicação de gerente.
+	 */
 	private static void iniciarAppGerente() {
 		String matricula;
 
@@ -137,6 +157,13 @@ public class AppBanco {
 		}
 	}
 
+	/**
+	 * Pede ao usuário que digita o número da agência desejada que será buscada
+	 * na pasta de agências.
+	 * 
+	 * @return Retorna a agência que tem número igual ao número digitado pelo
+	 *         usuário.
+	 */
 	private static Agencia digitarNumeroAgencia() {
 		int numero;
 		System.out.printf("Digite o número da agência: ");
